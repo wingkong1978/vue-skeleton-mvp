@@ -13,7 +13,7 @@
           hide-details
           clearable
           clear-icon="mdi-close"
-        ></v-text-field>
+        />
       </v-flex>
       <v-flex xs12 sm6 md4 text-xs-right mb-2 mt-2 pr-2>
         <v-dialog
@@ -22,7 +22,7 @@
           content-class="dlgNewEditItem"
         >
           <template v-slot:activator="{ on }">
-            <v-btn color="secondary" v-on="on" class="btnNewItem pr-4">
+            <v-btn color="secondary" class="btnNewItem pr-4" v-on="on">
               <v-icon class="mr-2">mdi-plus</v-icon>
               {{ $t('dataTable.NEW_ITEM') }}
             </v-btn>
@@ -51,36 +51,34 @@
                   <v-flex xs12>
                     <v-text-field
                       id="name"
-                      name="name"
                       v-model="editedItem.name"
+                      v-validate.disable="'required'"
+                      name="name"
                       :label="$t('cities.headers.NAME')"
                       :data-vv-as="$t('cities.headers.NAME')"
                       :error="errors.has('name')"
                       :error-messages="errors.collect('name')"
-                      v-validate.disable="'required'"
                       autocomplete="off"
-                    ></v-text-field>
+                    />
                   </v-flex>
                 </v-layout>
               </v-container>
             </v-card-text>
 
             <v-card-actions>
-              <v-spacer></v-spacer>
+              <v-spacer />
               <v-btn
                 color="red lighten3"
                 flat
-                @click="close"
                 class="btnCancel"
-                >{{ $t('dataTable.CANCEL') }}</v-btn
-              >
+                @click="close"
+              >{{ $t('dataTable.CANCEL') }}</v-btn>
               <v-btn
                 color="yellow lighten3"
                 flat
-                @click="save"
                 class="btnSave"
-                >{{ $t('dataTable.SAVE') }}</v-btn
-              >
+                @click="save"
+              >{{ $t('dataTable.SAVE') }}</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -104,9 +102,9 @@
           <v-layout class="justify-center">
             <v-tooltip top>
               <v-btn
+                slot="activator"
                 icon
                 class="mx-0"
-                slot="activator"
                 @click="editItem(props.item)"
               >
                 <v-icon>mdi-pencil</v-icon>
@@ -115,9 +113,9 @@
             </v-tooltip>
             <v-tooltip top>
               <v-btn
+                slot="activator"
                 icon
                 class="mx-0"
-                slot="activator"
                 @click="deleteItem(props.item)"
               >
                 <v-icon>mdi-delete</v-icon>

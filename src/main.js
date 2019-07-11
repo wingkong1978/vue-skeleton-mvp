@@ -15,13 +15,13 @@ const app = new Vue({
   router,
   store,
   i18n,
-  render: h => h(App),
   created() {
     store.dispatch('setLocale', store.getters.locale)
     if (store.getters.isTokenSet) {
       store.dispatch('autoLogin')
     }
-  }
+  },
+  render: h => h(App)
 }).$mount('#app')
 
 if (window.Cypress) {

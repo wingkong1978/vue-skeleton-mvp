@@ -9,16 +9,16 @@
             <v-flex>
               <v-text-field
                 id="email"
+                v-model="email"
+                v-validate.disable="'required|email'"
                 name="email"
                 type="email"
                 :label="$t('forgotPassword.EMAIL')"
-                v-model="email"
                 :data-vv-as="$t('forgotPassword.EMAIL')"
                 :error="errors.has('email')"
                 :error-messages="errors.collect('email')"
-                v-validate.disable="'required|email'"
                 autocomplete="off"
-              ></v-text-field>
+              />
             </v-flex>
             <v-flex text-xs-center mt-5>
               <v-btn color="secondary" @click="goBack()">

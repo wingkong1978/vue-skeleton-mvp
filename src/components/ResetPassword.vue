@@ -10,31 +10,31 @@
             <v-flex v-show="showChangePasswordInputs">
               <v-text-field
                 id="password"
+                ref="password"
+                v-model="password"
+                v-validate.disable="'required|min:5'"
                 name="password"
                 type="password"
                 :label="$t('resetPassword.PASSWORD')"
-                v-model="password"
                 :data-vv-as="$t('resetPassword.PASSWORD')"
                 :error="errors.has('password')"
                 :error-messages="errors.collect('password')"
-                v-validate.disable="'required|min:5'"
-                ref="password"
                 autocomplete="off"
-              ></v-text-field>
+              />
             </v-flex>
             <v-flex v-show="showChangePasswordInputs">
               <v-text-field
                 id="confirmPassword"
+                v-model="confirmPassword"
+                v-validate.disable="'required|min:5|confirmed:password'"
                 name="confirmPassword"
                 type="password"
                 :label="$t('resetPassword.CONFIRM_PASSWORD')"
-                v-model="confirmPassword"
                 :data-vv-as="$t('resetPassword.PASSWORD')"
                 :error="errors.has('confirmPassword')"
                 :error-messages="errors.collect('confirmPassword')"
-                v-validate.disable="'required|min:5|confirmed:password'"
                 autocomplete="off"
-              ></v-text-field>
+              />
             </v-flex>
             <v-flex v-show="showChangePasswordInputs" text-xs-center mt-5>
               <SubmitButton :text="$t('resetPassword.CHANGE_PASSWORD')" />

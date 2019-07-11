@@ -14,16 +14,15 @@
             <v-card-text>
               {{ $t('home.VERIFY_YOUR_ACCOUNT_DESCRIPTION') }}
             </v-card-text>
-            <v-divider></v-divider>
+            <v-divider />
             <v-card-actions>
-              <v-spacer></v-spacer>
+              <v-spacer />
               <v-btn
                 color="primary"
                 flat
-                @click="showVerifyDialog = false"
                 class="btnClose"
-                >{{ $t('home.CLOSE') }}</v-btn
-              >
+                @click="showVerifyDialog = false"
+              >{{ $t('home.CLOSE') }}</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>

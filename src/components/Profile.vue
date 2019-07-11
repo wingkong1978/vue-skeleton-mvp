@@ -9,11 +9,10 @@
               <v-btn
                 small
                 flat
+                class="btnChangePassword"
                 v-on="on"
                 @click="triggerChangePassword = true"
-                class="btnChangePassword"
-                >{{ $t('myProfile.CHANGE_MY_PASSWORD') }}</v-btn
-              >
+              >{{ $t('myProfile.CHANGE_MY_PASSWORD') }}</v-btn>
             </v-flex>
           </template>
           <v-card>
@@ -30,57 +29,57 @@
                       <v-flex xs12>
                         <v-text-field
                           id="oldPassword"
+                          key="oldPassword"
+                          v-model="oldPassword"
+                          v-validate.disable="'required|min:5'"
                           name="oldPassword"
                           type="password"
                           :label="$t('myProfile.CURRENT_PASSWORD')"
-                          v-model="oldPassword"
                           :data-vv-as="$t('myProfile.CURRENT_PASSWORD')"
                           :error="errors.has('oldPassword')"
                           :error-messages="errors.collect('oldPassword')"
-                          v-validate.disable="'required|min:5'"
-                          key="oldPassword"
                           autocomplete="off"
-                        ></v-text-field>
+                        />
                       </v-flex>
                       <v-flex xs12>
                         <v-text-field
                           id="newPassword"
+                          key="newPassword"
+                          ref="password"
+                          v-model="newPassword"
+                          v-validate.disable="'required|min:5'"
                           name="newPassword"
                           type="password"
                           :label="$t('myProfile.NEW_PASSWORD')"
-                          v-model="newPassword"
                           :data-vv-as="$t('myProfile.NEW_PASSWORD')"
                           :error="errors.has('newPassword')"
                           :error-messages="errors.collect('newPassword')"
-                          v-validate.disable="'required|min:5'"
-                          key="newPassword"
-                          ref="password"
                           autocomplete="off"
-                        ></v-text-field>
+                        />
                       </v-flex>
                       <v-flex xs12>
                         <v-text-field
                           id="confirmPassword"
-                          name="confirmPassword"
-                          type="password"
-                          :label="$t('myProfile.CONFIRM_NEW_PASSWORD')"
+                          key="confirmPassword"
                           v-model="confirmPassword"
-                          :data-vv-as="$t('myProfile.NEW_PASSWORD')"
-                          :error="errors.has('confirmPassword')"
-                          :error-messages="errors.collect('confirmPassword')"
                           v-validate.disable="
                             'required|min:5|confirmed:password'
                           "
-                          key="confirmPassword"
+                          name="confirmPassword"
+                          type="password"
+                          :label="$t('myProfile.CONFIRM_NEW_PASSWORD')"
+                          :data-vv-as="$t('myProfile.NEW_PASSWORD')"
+                          :error="errors.has('confirmPassword')"
+                          :error-messages="errors.collect('confirmPassword')"
                           autocomplete="off"
-                        ></v-text-field>
+                        />
                       </v-flex>
                     </template>
                   </v-layout>
                 </v-container>
               </v-card-text>
               <v-card-actions>
-                <v-spacer></v-spacer>
+                <v-spacer />
                 <v-btn color="red lighten3" flat @click="close">
                   {{ $t('dataTable.CANCEL') }}
                 </v-btn>
@@ -99,53 +98,54 @@
               <v-flex xs12 md6>
                 <v-text-field
                   id="email"
+                  v-model="email"
+                  v-validate.disable="'required|email'"
                   name="email"
                   type="email"
                   :label="$t('myProfile.EMAIL')"
-                  v-model="email"
                   :data-vv-as="$t('myProfile.EMAIL')"
                   :error="errors.has('email')"
                   :error-messages="errors.collect('email')"
-                  v-validate.disable="'required|email'"
                   disabled
                   autocomplete="off"
-                ></v-text-field>
+                />
               </v-flex>
               <v-flex xs12 md6>
                 <v-text-field
                   id="name"
+                  v-model="name"
+                  v-validate.disable="'required'"
                   name="name"
                   type="text"
                   :label="$t('myProfile.NAME')"
-                  v-model="name"
                   :data-vv-as="$t('myProfile.NAME')"
                   :error="errors.has('name')"
                   :error-messages="errors.collect('name')"
-                  v-validate.disable="'required'"
                   autocomplete="off"
-                ></v-text-field>
+                />
               </v-flex>
               <v-flex xs12 md4>
                 <v-text-field
                   id="phone"
+                  v-model="phone"
+                  v-validate.disable="'required'"
                   name="phone"
                   type="tel"
                   :label="$t('myProfile.PHONE')"
-                  v-model="phone"
                   :data-vv-as="$t('myProfile.PHONE')"
                   :error="errors.has('phone')"
                   :error-messages="errors.collect('phone')"
-                  v-validate.disable="'required'"
                   autocomplete="off"
-                ></v-text-field>
+                />
               </v-flex>
               <v-flex xs12 md4>
                 <v-autocomplete
                   id="city"
+                  v-model="city"
+                  v-validate.disable="'required'"
                   name="city"
                   :label="$t('myProfile.CITY')"
                   :search-input.sync="searchInput"
-                  v-model="city"
                   :items="allCities"
                   clearable
                   clear-icon="mdi-close"
@@ -153,56 +153,55 @@
                   :data-vv-as="$t('myProfile.CITY')"
                   :error="errors.has('city')"
                   :error-messages="errors.collect('city')"
-                  v-validate.disable="'required'"
                   autocomplete="off"
                 />
               </v-flex>
               <v-flex xs12 md4>
                 <v-text-field
                   id="country"
+                  v-model="country"
+                  v-validate.disable="'required'"
                   name="country"
                   type="text"
                   :label="$t('myProfile.COUNTRY')"
-                  v-model="country"
                   :data-vv-as="$t('myProfile.COUNTRY')"
                   :error="errors.has('country')"
                   :error-messages="errors.collect('country')"
-                  v-validate.disable="'required'"
                   autocomplete="off"
-                ></v-text-field>
+                />
               </v-flex>
               <v-flex xs12 md6>
                 <v-text-field
                   id="urlTwitter"
+                  v-model="urlTwitter"
+                  v-validate.disable="'url'"
                   name="urlTwitter"
                   type="url"
                   label="Twitter"
-                  v-model="urlTwitter"
                   data-vv-as="Twitter"
                   :error="errors.has('urlTwitter')"
                   :error-messages="errors.collect('urlTwitter')"
-                  v-validate.disable="'url'"
                   autocomplete="off"
-                ></v-text-field>
+                />
               </v-flex>
               <v-flex xs12 md6>
                 <v-text-field
                   id="urlGitHub"
+                  v-model="urlGitHub"
+                  v-validate.disable="'url'"
                   name="urlGitHub"
                   type="url"
                   label="GitHub"
-                  v-model="urlGitHub"
                   data-vv-as="GitHub"
                   :error="errors.has('urlGitHub')"
                   :error-messages="errors.collect('urlGitHub')"
-                  v-validate.disable="'url'"
                   autocomplete="off"
-                ></v-text-field>
+                />
               </v-flex>
               <v-flex text-xs-center mt-5>
                 <SubmitButton
                   :text="$t('myProfile.SAVE')"
-                  customClass="btnSave"
+                  custom-class="btnSave"
                 />
               </v-flex>
             </v-layout>

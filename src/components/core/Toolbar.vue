@@ -51,32 +51,30 @@
     </v-navigation-drawer>
     <v-toolbar app>
       <span class="hidden-md-and-up">
-        <v-toolbar-side-icon @click="sidebar = !sidebar"></v-toolbar-side-icon>
+        <v-toolbar-side-icon @click="sidebar = !sidebar" />
       </span>
       <v-toolbar-title class="headline text-uppercase ml-0">
         <div v-resize-text>
           <router-link
+            v-if="isTokenSet"
             :to="{ name: 'home' }"
             tag="span"
             style="cursor: pointer"
-            v-if="isTokenSet"
-            >{{ appTitle }}</router-link
-          >
+          >{{ appTitle }}</router-link>
           <router-link
+            v-else
             :to="{ name: 'landing' }"
             tag="span"
             style="cursor: pointer"
-            v-else
-            >{{ appTitle }}</router-link
-          >
+          >{{ appTitle }}</router-link>
         </div>
       </v-toolbar-title>
-      <v-spacer></v-spacer>
+      <v-spacer />
       <v-toolbar-items>
         <v-btn
-          flat
           v-for="(item, index) in menuItems"
           :key="index"
+          flat
           :to="{ name: item.link }"
           exact
           :class="['hidden-sm-and-down', item.class]"
@@ -92,9 +90,9 @@
           </v-btn>
           <v-list>
             <v-list-tile
-              active-class="white--text"
               v-for="(item, index) in adminItems"
               :key="index"
+              active-class="white--text"
               :to="{ name: item.link }"
               exact
               :class="[item.class]"
@@ -108,10 +106,10 @@
         </v-menu>
 
         <v-btn
-          flat
           v-if="isTokenSet"
-          @click="userLogout"
+          flat
           class="hidden-sm-and-down btnLogout"
+          @click="userLogout"
         >
           <v-icon left>mdi-exit-to-app</v-icon>
           {{ $t('menuItems.LOGOUT') }}

@@ -9,30 +9,30 @@
             <v-flex>
               <v-text-field
                 id="email"
+                v-model="email"
+                v-validate.disable="'required|email'"
                 name="email"
                 type="email"
                 :label="$t('login.EMAIL')"
-                v-model="email"
                 :data-vv-as="$t('login.EMAIL')"
                 :error="errors.has('email')"
                 :error-messages="errors.collect('email')"
-                v-validate.disable="'required|email'"
                 autocomplete="off"
-              ></v-text-field>
+              />
             </v-flex>
             <v-flex>
               <v-text-field
                 id="password"
+                v-model="password"
+                v-validate.disable="'required|min:5'"
                 name="password"
                 type="password"
                 :label="$t('login.PASSWORD')"
-                v-model="password"
                 :data-vv-as="$t('login.PASSWORD')"
                 :error="errors.has('password')"
                 :error-messages="errors.collect('password')"
-                v-validate.disable="'required|min:5'"
                 autocomplete="off"
-              ></v-text-field>
+              />
             </v-flex>
             <v-flex text-xs-center mt-5>
               <SubmitButton :text="$t('login.LOGIN')" />
@@ -44,8 +44,7 @@
                 small
                 flat
                 class="btnForgotPassword"
-                >{{ $t('login.FORGOT_PASSWORD') }}</v-btn
-              >
+              >{{ $t('login.FORGOT_PASSWORD') }}</v-btn>
             </v-flex>
           </v-layout>
         </form>

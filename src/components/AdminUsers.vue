@@ -13,7 +13,7 @@
           hide-details
           clearable
           clear-icon="mdi-close"
-        ></v-text-field>
+        />
       </v-flex>
       <v-flex xs12 sm6 md4 text-xs-right mb-2 mt-2 pr-2>
         <v-dialog
@@ -22,7 +22,7 @@
           content-class="dlgNewEditItem"
         >
           <template v-slot:activator="{ on }">
-            <v-btn color="secondary" v-on="on" class="btnNewItem pr-4">
+            <v-btn color="secondary" class="btnNewItem pr-4" v-on="on">
               <v-icon class="mr-2">mdi-plus</v-icon>
               {{ $t('dataTable.NEW_ITEM') }}
             </v-btn>
@@ -54,75 +54,76 @@
                       <div
                         name="verified"
                         v-html="trueFalse(editedItem.verified)"
-                      ></div>
+                      />
                     </v-flex>
                   </template>
                   <v-flex xs12 md6>
                     <v-text-field
                       id="name"
-                      name="name"
                       v-model="editedItem.name"
+                      v-validate.disable="'required'"
+                      name="name"
                       :label="$t('users.headers.NAME')"
                       :data-vv-as="$t('users.headers.NAME')"
                       :error="errors.has('name')"
                       :error-messages="errors.collect('name')"
-                      v-validate.disable="'required'"
                       autocomplete="off"
-                    ></v-text-field>
+                    />
                   </v-flex>
                   <v-flex xs12 md6>
                     <v-text-field
                       id="email"
+                      v-model="editedItem.email"
+                      v-validate.disable="'required|email'"
                       name="email"
                       type="email"
-                      v-model="editedItem.email"
                       :label="$t('users.headers.EMAIL')"
                       :data-vv-as="$t('users.headers.EMAIL')"
                       :error="errors.has('email')"
                       :error-messages="errors.collect('email')"
-                      v-validate.disable="'required|email'"
                       autocomplete="off"
-                    ></v-text-field>
+                    />
                   </v-flex>
                   <template v-if="!editedItem._id">
                     <v-flex xs12 md6>
                       <v-text-field
                         id="password"
+                        key="password"
+                        ref="password"
+                        v-model="editedItem.password"
+                        v-validate.disable="'required|min:5'"
                         name="password"
                         type="password"
                         :label="$t('users.PASSWORD')"
-                        v-model="editedItem.password"
                         :data-vv-as="$t('users.PASSWORD')"
                         :error="errors.has('password')"
                         :error-messages="errors.collect('password')"
-                        key="password"
-                        v-validate.disable="'required|min:5'"
-                        ref="password"
                         autocomplete="off"
-                      ></v-text-field>
+                      />
                     </v-flex>
                     <v-flex xs12 md6>
                       <v-text-field
                         id="confirmPassword"
+                        key="confirmPassword"
+                        v-model="editedItem.confirmPassword"
+                        v-validate.disable="'required|min:5|confirmed:password'"
                         name="confirmPassword"
                         type="password"
                         :label="$t('users.CONFIRM_PASSWORD')"
-                        v-model="editedItem.confirmPassword"
                         :data-vv-as="$t('users.PASSWORD')"
                         :error="errors.has('confirmPassword')"
                         :error-messages="errors.collect('confirmPassword')"
-                        key="confirmPassword"
-                        v-validate.disable="'required|min:5|confirmed:password'"
                         autocomplete="off"
-                      ></v-text-field>
+                      />
                     </v-flex>
                   </template>
                   <v-flex xs12 md6>
                     <v-select
-                      clearable
                       id="role"
-                      name="role"
                       v-model="editedItem.role"
+                      v-validate.disable="'required'"
+                      clearable
+                      name="role"
                       :items="roles"
                       item-text="name"
                       item-value="value"
@@ -130,23 +131,22 @@
                       :data-vv-as="$t('users.headers.ROLE')"
                       :error="errors.has('role')"
                       :error-messages="errors.collect('role')"
-                      v-validate.disable="'required'"
                       class="inputRole"
-                    ></v-select>
+                    />
                   </v-flex>
                   <v-flex xs12 md6>
                     <v-autocomplete
                       id="city"
+                      v-model="editedItem.city"
+                      v-validate.disable="'required'"
                       name="city"
                       :label="$t('users.headers.CITY')"
                       :search-input.sync="searchInput"
-                      v-model="editedItem.city"
                       :items="allCities"
                       clearable
                       :data-vv-as="$t('users.headers.CITY')"
                       :error="errors.has('city')"
                       :error-messages="errors.collect('city')"
-                      v-validate.disable="'required'"
                       autocomplete="off"
                       class="inputCity"
                     />
@@ -154,50 +154,48 @@
                   <v-flex xs12 md6>
                     <v-text-field
                       id="country"
-                      name="country"
                       v-model="editedItem.country"
+                      v-validate.disable="'required'"
+                      name="country"
                       :label="$t('users.headers.COUNTRY')"
                       :data-vv-as="$t('users.headers.COUNTRY')"
                       :error="errors.has('country')"
                       :error-messages="errors.collect('country')"
-                      v-validate.disable="'required'"
                       autocomplete="off"
-                    ></v-text-field>
+                    />
                   </v-flex>
                   <v-flex xs12 md6>
                     <v-text-field
                       id="phone"
+                      v-model="editedItem.phone"
+                      v-validate.disable="'required'"
                       name="phone"
                       type="tel"
-                      v-model="editedItem.phone"
                       :label="$t('users.headers.PHONE')"
                       :data-vv-as="$t('users.headers.PHONE')"
                       :error="errors.has('phone')"
                       :error-messages="errors.collect('phone')"
-                      v-validate.disable="'required'"
                       autocomplete="off"
-                    ></v-text-field>
+                    />
                   </v-flex>
                 </v-layout>
               </v-container>
             </v-card-text>
 
             <v-card-actions>
-              <v-spacer></v-spacer>
+              <v-spacer />
               <v-btn
                 color="red lighten3"
                 flat
-                @click="close"
                 class="btnCancel"
-                >{{ $t('dataTable.CANCEL') }}</v-btn
-              >
+                @click="close"
+              >{{ $t('dataTable.CANCEL') }}</v-btn>
               <v-btn
                 color="yellow lighten3"
                 flat
-                @click="save"
                 class="btnSave"
-                >{{ $t('dataTable.SAVE') }}</v-btn
-              >
+                @click="save"
+              >{{ $t('dataTable.SAVE') }}</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -221,9 +219,9 @@
           <v-layout class="justify-center">
             <v-tooltip top>
               <v-btn
+                slot="activator"
                 icon
                 class="mx-0"
-                slot="activator"
                 @click="editItem(props.item)"
               >
                 <v-icon>mdi-pencil</v-icon>
@@ -232,9 +230,9 @@
             </v-tooltip>
             <v-tooltip top>
               <v-btn
+                slot="activator"
                 icon
                 class="mx-0"
-                slot="activator"
                 @click="deleteItem(props.item)"
               >
                 <v-icon>mdi-delete</v-icon>
@@ -246,7 +244,7 @@
         <td>{{ props.item.name }}</td>
         <td>{{ props.item.email }}</td>
         <td>{{ roleName(props.item.role) }}</td>
-        <td v-html="trueFalse(props.item.verified)"></td>
+        <td v-html="trueFalse(props.item.verified)" />
         <td>{{ props.item.city }}</td>
         <td>{{ props.item.country }}</td>
         <td>{{ props.item.phone }}</td>

@@ -5,8 +5,7 @@
     :disabled="disabledButton"
     :class="customClass"
     :flat="flat"
-    >{{ text }}</v-btn
-  >
+  >{{ text }}</v-btn>
 </template>
 
 <script>

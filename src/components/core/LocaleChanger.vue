@@ -1,17 +1,17 @@
 <template>
   <v-menu v-model="showMenu" offset-y>
-    <v-btn class="btnLocaleActivation" slot="activator" flat>
+    <v-btn slot="activator" class="btnLocaleActivation" flat>
       <v-icon>mdi-earth</v-icon>
       &nbsp;{{ displayLocale }}
     </v-btn>
     <v-list>
       <v-list-tile
-        active-class="white--text"
         v-for="(item, i) in langs"
         :key="`Lang${i}`"
+        active-class="white--text"
         :value="item.lang"
-        @click="switchLocale(item.lang)"
         :class="[item.class]"
+        @click="switchLocale(item.lang)"
       >
         <country-flag :country="item.flag" size="small" class="pl-5" />
         <v-list-tile-title class="ml-3">{{
@@ -26,6 +26,9 @@
 import CountryFlag from 'vue-country-flag'
 
 export default {
+  components: {
+    CountryFlag
+  },
   data() {
     return {
       showMenu: false,
@@ -43,17 +46,14 @@ export default {
       ]
     }
   },
-  components: {
-    CountryFlag
+  computed: {
+    displayLocale() {
+      return this.$i18n.locale
+    }
   },
   methods: {
     switchLocale(lang) {
       this.$store.dispatch('setLocale', lang)
-    }
-  },
-  computed: {
-    displayLocale() {
-      return this.$i18n.locale
     }
   }
 }
